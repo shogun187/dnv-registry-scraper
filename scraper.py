@@ -1,6 +1,8 @@
 from selenium import webdriver
+from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.options import PageLoadStrategy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
@@ -10,17 +12,23 @@ import time
 service = Service("F:/projects/vessel-scraper/chromedriver.exe")  # Change to the path where chromedriver is located
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # Run headless Chrome
+
+# Set page load strategy
+options.page_load_strategy = 'eager'
+
 driver = webdriver.Chrome(service=service, options=options)
 
 
 # URL to scrape
 # url = "https://vesselregister.dnv.com/vesselregister/details/G12916"
-url = "https://vesselregister.dnv.com/vesselregister/details/G31223"
+# url = "https://vesselregister.dnv.com/vesselregister/details/G31223"
+url = "https://vesselregister.dnv.com/vesselregister/imo/9929247"
 
-print("Breakpoint 1")
+
+
 # Request the page with Selenium
 driver.get(url)
-print("Breakpoint 2")
+print("driver.get completed")
 
 # Wait for the page to fully load by checking for the presence of the first data element
 WebDriverWait(driver, 10).until(
