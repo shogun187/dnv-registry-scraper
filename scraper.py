@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
+import time
 
 # Set up the Selenium WebDriver (assume chromedriver is in PATH)
 service = Service("F:/projects/vessel-scraper/chromedriver.exe")  # Change to the path where chromedriver is located
@@ -11,21 +12,30 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # Run headless Chrome
 driver = webdriver.Chrome(service=service, options=options)
 
-# URL to scrape
-url = "https://vesselregister.dnv.com/vesselregister/details/G12916"
 
+# URL to scrape
+# url = "https://vesselregister.dnv.com/vesselregister/details/G12916"
+url = "https://vesselregister.dnv.com/vesselregister/details/G31223"
+
+print("Breakpoint 1")
 # Request the page with Selenium
 driver.get(url)
+print("Breakpoint 2")
 
-# Wait for the specific data field elements to be loaded
-WebDriverWait(driver, 20).until(
-    EC.presence_of_element_located((By.CLASS_NAME, 'item-row'))  # Adjust the class name as needed
+# Wait for the page to fully load by checking for the presence of the first data element
+WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.CLASS_NAME, 'item-row'))
 )
+
+# Expand all collapsible sections
+collapsible_headers = driver.find_elements(By.CSS_SELECTOR, '.ant-collapse-header')
+for header in collapsible_headers:
+    header.click()
 
 # Get the page source and parse with BeautifulSoup
 page_content = driver.page_source
-print(page_content)
 soup = BeautifulSoup(page_content, 'html.parser')
+
 
 # Function to scrape all fields
 def scrape_fields(soup):
@@ -35,6 +45,7 @@ def scrape_fields(soup):
         field_value = row.find('div', class_='item-value').get_text(strip=True)
         data[field_name] = field_value
     return data
+
 
 # Call the function to scrape fields
 vessel_data = scrape_fields(soup)
