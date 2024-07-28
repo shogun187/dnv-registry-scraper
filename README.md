@@ -1,0 +1,1 @@
+Web scraper app created using Python, Selenium and Beautiful Soup to obtain cargo, maintenance and engine data regarding 10,000+ container ships. Created for shipping data analysis company Linerlytica.
