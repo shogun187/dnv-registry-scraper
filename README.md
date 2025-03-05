@@ -4,7 +4,6 @@ A Python-based web scraper using **Selenium** and **Beautiful Soup** to collect 
 
 ## Features
 - Collects data on cargo, maintenance, and engine specifics of container ships
-- Processes data on over 20,000 container ships
 - Outputs structured data for streamlined analysis
 
 ## Setup Instructions
@@ -27,4 +26,4 @@ A Python-based web scraper using **Selenium** and **Beautiful Soup** to collect 
 2. Run the following command:
 
    ```bash
-   python Scraper.py
+   python scraper.py
