@@ -1,4 +1,4 @@
-# Web Scraper for Container Ship Data
+# Web Scraper for Container Ship Data (DNV Registry)
 
 A Python-based web scraper using **Selenium** and **Beautiful Soup** to collect cargo, maintenance, and engine data on over 10,000 container ships. Created for the shipping data analysis company **Linerlytica**, this scraper gathers vessel data from the online **Det Norske Veritas (DNV)** registry.
 
